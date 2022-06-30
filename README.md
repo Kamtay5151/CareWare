@@ -26,6 +26,7 @@ On the top bar, select the terminal menu, followed by new terminal (if one isn't
 
 After modifying a file (or multiple)
   - go to the source control page
+  - click the three dots, then pull. This forcefully pulls down any changes made by others currently on github
   - click the plus button next to any changes you want to commit (or do all)
   - enter a commit message (like: "add home page" or "fix login bug", don't use past tense)
   - press the check mark to commit (this commits your changes locally to git, you will still need to push these up to github for others to see them)
