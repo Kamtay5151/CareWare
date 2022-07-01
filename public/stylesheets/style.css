@@ -25,16 +25,42 @@ div > #logo {
 
 div > #navmenu {
   float:right;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div > #navmenu > a {
+  font-size: 28px;
+  color: darkblue;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-decoration: none;
 }
 
 div#content {
   margin-left: 25px;
 }
 
+#appointment-list {
+  height: 600px;
+  width: 500px;
+  padding: 25px;
+  margin-top: 25px;
+  border: 1px;
+  border-color: black;
+  border-style: dashed;
+}
+
 footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 200px;
   width: 100%;
   margin: 0px;
   background-color: gray;
   margin-top: auto;
 }
+
