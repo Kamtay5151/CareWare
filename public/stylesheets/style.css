@@ -1,8 +1,40 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: darkgray;
+  margin: 0px;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 a {
   color: #00B7FF;
+}
+
+header {
+  height: 200px;
+  width: 100%;
+  margin: 0px;
+  background-color: gray;
+}
+
+div > #logo {
+  float: left;
+}
+
+div > #navmenu {
+  float:right;
+}
+
+div#content {
+  margin-left: 25px;
+}
+
+footer {
+  height: 200px;
+  width: 100%;
+  margin: 0px;
+  background-color: gray;
+  margin-top: auto;
 }
