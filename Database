@@ -1,0 +1,7 @@
++create table Patient Data
+(
+	Patient_Name varchar2(30),
+	G_Date date,
+	Patient_Type varchar2(10),
+	constraint type check (Patient_Type = 'General')
+);
