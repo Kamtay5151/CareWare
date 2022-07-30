@@ -3,11 +3,17 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+
+import sqlite3 from 'sqlite3';
+import { open } from "sqlite";
+
 //Initialize DB
-var db = require('./initdb.js');
+const dbPromise = open({
+  filename: "careware.db",
+  driver: sqlite3.Database,
+});
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 
 var app = express();
 
@@ -24,9 +30,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
-exports.db = db;
+const setup = async () => {
+  const db = await dbPromise;
+  await db.migrate();
+};
+setup();
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

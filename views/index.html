@@ -10,7 +10,9 @@
 
     <div id="content">
       <div id="appointment-list">
-        Upcoming appointment list will go here
+        <% appointments.forEach(function(appointment) { %>
+          <li> ID:<%= appointment.patient_id %> Time:<%= appointment.time %></li>
+        <% }); %> 
       </div>
     </div>
 
