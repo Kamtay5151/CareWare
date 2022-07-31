@@ -52,7 +52,14 @@ app.post("/register", async (req, res) => {
 
   const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
 
-  await db.run('INSERT INTO users (username, password) VALUES (?, ?)', username, passwordHash);
+  const dbUser = await db.all('SELECT username FROM users where username = ?', username);
+
+  if (dbUser[0]) {
+    res.render("register", { error: "Username already registered" });
+    return;
+  } else {
+    await db.run('INSERT INTO users (username, password) VALUES (?, ?)', username, passwordHash);
+  }
  
   res.redirect("/");
 });
