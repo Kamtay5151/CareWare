@@ -3,9 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+import bcrypt from 'bcrypt';
 
 import sqlite3 from 'sqlite3';
 import { open } from "sqlite";
+
+const SALT_ROUNDS = 10;
 
 //Initialize DB
 const dbPromise = open({
@@ -14,6 +17,7 @@ const dbPromise = open({
 });
 
 var indexRouter = require('./routes/index');
+var loginRouter = require('./routes/login');
 
 var app = express();
 
@@ -30,6 +34,29 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+
+app.get("/register", async (req, res) => {
+  res.render("register");
+});
+
+app.post("/register", async (req, res) => {
+  const db = await dbPromise;
+  const { username, password, passwordRepeat } = req.body;
+  console.log(password);
+  console.log(passwordRepeat);
+
+  if (password !== passwordRepeat) {
+    res.render("register", { error: "Passwords must match" });
+    return;
+  }
+
+  const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
+
+  await db.run('INSERT INTO users (username, password) VALUES (?, ?)', username, passwordHash);
+ 
+  console.log(passwordHash);
+  res.redirect("/");
+});
 
 const setup = async () => {
   const db = await dbPromise;
