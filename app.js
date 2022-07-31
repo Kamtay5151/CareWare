@@ -17,7 +17,6 @@ const dbPromise = open({
 });
 
 var indexRouter = require('./routes/index');
-var loginRouter = require('./routes/login');
 
 var app = express();
 
@@ -38,12 +37,13 @@ app.use('/', indexRouter);
 app.get("/register", async (req, res) => {
   res.render("register");
 });
+app.get("/login", async (req, res) => {
+  res.render("login");
+});
 
 app.post("/register", async (req, res) => {
   const db = await dbPromise;
   const { username, password, passwordRepeat } = req.body;
-  console.log(password);
-  console.log(passwordRepeat);
 
   if (password !== passwordRepeat) {
     res.render("register", { error: "Passwords must match" });
@@ -54,9 +54,27 @@ app.post("/register", async (req, res) => {
 
   await db.run('INSERT INTO users (username, password) VALUES (?, ?)', username, passwordHash);
  
-  console.log(passwordHash);
   res.redirect("/");
 });
+
+app.post("/login", async (req, res) => {
+  const db = await dbPromise;
+  const { username, password } = req.body;
+  const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
+
+  const dbUser = await db.all('SELECT password FROM users where username = ?', username);
+
+  await bcrypt.compare(password, dbUser[0].password).then(function(result) {
+    if (!result) {
+      res.render("login", { error: "Invalid username or password" });
+      return;
+    } else {
+      res.redirect("/");
+    }
+  })
+  
+});
+
 
 const setup = async () => {
   const db = await dbPromise;
