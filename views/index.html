@@ -1,31 +1,37 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <img src = "logo.png" alt="logo image" id="logo">
-    <link rel='stylesheet' href='style.css' />
-    <ul>
-      <li><a href="#index">Home</a></li>
-      <li><a href="#appointment">Schedule Appointment</a></li>
-      <li><a href="#schedulue">Physician Schedule</a></li>
-      <li><a href="#records">Patient Records</a></li>
-    </ul>
-  </head>
-  <body>
 
-    <h1>CareWare</h1>
-    <h2>Practical Solutions</h2>
+<head>
+  <img src="logo.png" alt="logo image" id="logo">
+  <link rel='stylesheet' href='style.css' />
+  <ul>
+    <li><a href="#index">Home</a></li>
+    <li><a href="#appointment">Schedule Appointment</a></li>
+    <li><a href="#schedulue">Physician Schedule</a></li>
+    <li><a href="#records">Patient Records</a></li>
+  </ul>
+</head>
 
-    <!--  <%- include('partials/header.html'); %>  -->
+<body>
+  <div id="box">
+  <img src="medicalTech.jpg" alt="medicalTech" id="medtech" style = "float: left;">
+  <h1>CareWare: <br> Pratical Solutions</h1>
+  
+  </div>
 
-    <div id="content">
+  
+
+  <!--  <%- include('partials/header.html'); %>  -->
+  <!-- <div id="content">
       <div id="appointment-list">
         <% appointments.forEach(function(appointment) { %>
           <li> ID:<%= appointment.patient_id %> Time:<%= appointment.time %></li>
         <% }); %> 
       </div>
-    </div>
+    </div> -->
+</body>
+<footer>
+  <div id="copyright">&copy; CareWare 2022</div>
+</footer>
 
-    <%- include('partials/footer.html'); %>
-
-  </body>
 </html>
