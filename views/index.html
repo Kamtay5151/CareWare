@@ -1,21 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <img src = "logo.png" alt="logo image" id="logo">
-    <link rel='stylesheet' href='style.css' />
-    <ul>
-      <li><a href="#index">Home</a></li>
-      <li><a href="#appointment">Schedule Appointment</a></li>
-      <li><a href="#schedulue">Physician Schedule</a></li>
-      <li><a href="#records">Patient Records</a></li>
-    </ul>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
 
-    <h1>CareWare</h1>
-    <h2>Practical Solutions</h2>
+    <%- include('partials/header.html'); %>
 
-    <!--  <%- include('partials/header.html'); %>  -->
 
     <div id="content">
       <div id="appointment-list">
