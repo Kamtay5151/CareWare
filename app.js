@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 import bcrypt from 'bcrypt';
+import alert from 'alert';
 
 import sqlite3 from 'sqlite3';
 import { open } from "sqlite";
@@ -39,6 +40,13 @@ app.get("/register", async (req, res) => {
 });
 app.get("/login", async (req, res) => {
   res.render("login");
+});
+app.get("/newappt", async (req, res) => {
+  const db = await dbPromise;
+  const doctors = await db.all('SELECT * FROM doctors');
+  const rooms = await db.all('SELECT * FROM rooms');
+  const patients = await db.all('SELECT * FROM patients');
+  res.render("newappt", {doctors, rooms, patients});
 });
 
 app.post("/register", async (req, res) => {
@@ -82,6 +90,29 @@ app.post("/login", async (req, res) => {
   
 });
 
+app.post("/newappt", async (req, res) => {
+  const db = await dbPromise;
+  const { doctor, patient, room, time } = req.body;
+
+  const [docSurname, docGivenName] = doctor.split(', ')
+  const [patientSurname, patientGivenName] = patient.split(', ')
+
+  const DBdoc = await db.all('SELECT doc_id FROM doctors where doc_givenname = ? and doc_surname = ?', docGivenName, docSurname);
+  const DBpatient = await db.all('SELECT patient_id FROM patients where patient_givenname = ? and patient_surname = ?', patientGivenName, patientSurname);
+  const DBroom = await db.all('SELECT room_id FROM rooms where room_number = ?', room);
+
+  //convert time selection to unix/epoch time for DB
+  const [datePart, timePart] = time.split('T');
+  const [year, month, day] = datePart.split('-');
+  const [hours, minutes] = timePart.split(':');
+  const date = new Date(+year, month - 1, +day, +hours, +minutes, +0);
+  const unixTime = Math.floor(date.getTime() / 1000);
+
+  await db.run('INSERT INTO appointments (patient_id, room_id, doc_id, time) VALUES (?, ?, ?, ?)', DBpatient[0].patient_id, DBroom[0].room_id, DBdoc[0].doc_id, unixTime);
+  alert("Appointment Created!");
+  res.redirect("/");
+  
+});
 
 const setup = async () => {
   const db = await dbPromise;

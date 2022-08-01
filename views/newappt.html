@@ -1,0 +1,34 @@
+<% if (typeof error == 'string' && error) { %>
+    <p><%= error %></p>
+<% } %>
+<form action="/newappt" method="post">
+    <datalist id="patients">
+        <% patients.forEach(function(patient) { %>
+            <option><%= patient.patient_surname %>, <%= patient.patient_givenname %></option>
+        <% }); %> 
+    </datalist>
+    <datalist id="doctors">
+        <% doctors.forEach(function(doctor) { %>
+            <option><%= doctor.doc_surname %>, <%= doctor.doc_givenname %></option>
+        <% }); %> 
+    </datalist>
+    <datalist id="rooms">
+        <% rooms.forEach(function(room) { %>
+            <option><%= room.room_number %></option>
+        <% }); %> 
+    </datalist>
+
+    <label for="patientField">Patient Name: </label>
+    <input list="patients" id="patientField" name="patient">
+    <br>
+    <label for="roomField">Room: </label>
+    <input list="rooms" id="roomField" name="room">
+    <br>
+    <label for="doctorField">Doctor: </label>
+    <input list="doctors" id="doctorField" name="doctor">
+    <br>
+    <label for="datetimeField">Date/Time: </label>
+    <input type="datetime-local" id="datetimeField" name="time">
+    <br>
+    <button type="submit">Submit</button>
+</form>
