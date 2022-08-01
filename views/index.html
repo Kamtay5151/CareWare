@@ -24,8 +24,16 @@
   <!--  <%- include('partials/header.html'); %>  -->
   <!-- <div id="content">
       <div id="appointment-list">
-        <% appointments.forEach(function(appointment) { %>
-          <li> ID:<%= appointment.patient_id %> Time:<%= appointment.time %></li>
+        <% appointments.forEach(function(appointment) { 
+          const datetime = new Date(appointment.time * 1000);
+          %>
+          <div> 
+            <br>
+            Patient: <%= appointment.patient_surname%>, <%= appointment.patient_givenname %> <br>
+            Doctor: <%= appointment.doc_surname%>, <%= appointment.doc_givenname %> <br>
+            Room: <%= appointment.room_number%> <br>
+            Time: <%= datetime.toLocaleString() %> <br>
+          </div>
         <% }); %> 
       </div>
     </div> -->

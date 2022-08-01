@@ -1,0 +1,12 @@
+<% if (typeof error == 'string' && error) { %>
+    <p><%= error %></p>
+<% } %>
+<form action="/register" method="post">
+    <label for="usernameField">username: </label>
+    <input type="text" id="usernameField" name="username">
+    <label for="passwordField">password: </label>
+    <input type="text" id="passwordField" name="password">
+    <label for="passwordRepeatField">repeat password: </label>
+    <input type="text" id="passwordRepeatField" name="passwordRepeat">
+    <button type="submit">register</button>
+</form>

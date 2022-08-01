@@ -31,9 +31,16 @@ create table patientRecords (
     note TEXT NOT NULL
 );
 
+create table users (
+    user_id INTEGER PRIMARY KEY,
+    username STRING NOT NULL,
+    password STRING NOT NULL
+);
+
 -- Down
 drop table patients;
 drop table rooms;
 drop table doctors;
 drop table appointments;
 drop table patientRecords;
+drop table users;
