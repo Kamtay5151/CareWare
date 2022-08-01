@@ -1,67 +1,116 @@
+head {
+    background-color: blue;
+}
+
+#logo {
+  height: 200px;
+  width: 200px;
+}
+
+#medtech {
+  height: 450px;
+  width: 800px;
+  padding-top: 50px;
+  padding-left: 50px;
+}
+
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: darkgray;
-  margin: 0px;
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-  justify-content: flex-start;
-}
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background-color: gray;
+    margin: 0px;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 
+  h1 {
+    text-align: right;
+    font-size: 70px;
+    padding-left: 20%;
+    color: aqua;
+  }
 
-a {
-  color: #00B7FF;
-}
+  #box {
+    display: flex;
+    align-items: center;
+  }
 
-header {
-  height: 200px;
-  width: 100%;
-  margin: 0px;
-  background-color: gray;
-}
+  h2 {
+    color: aliceblue;
+  }
 
-div > #logo {
-  float: left;
-}
+  ul {
+    list-style-type: square;
+    margin: 0;
+    padding: 0;
+    padding-left: 10%;
+    padding-bottom: 25px;
+    background-color: darkgray;
+  }
 
-div > #navmenu {
-  float:right;
-  height: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-div > #navmenu > a {
-  font-size: 28px;
-  color: darkblue;
-  padding-left: 20px;
-  padding-right: 20px;
-  text-decoration: none;
-}
-
-div#content {
-  margin-left: 25px;
-}
-
-#appointment-list {
-  height: 600px;
-  width: 500px;
-  padding: 25px;
-  margin-top: 25px;
-  border: 1px;
-  border-color: black;
-  border-style: dashed;
-}
-
-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
-  width: 100%;
-  margin: 0px;
-  background-color: gray;
-  margin-top: auto;
-}
-
+  li {
+    display: inline-table;
+  }
+  
+  a {
+    color: white;
+    display: block;
+    padding: 10px;
+    font-size: x-large;
+    background-color: darkgray;
+    }
+  
+  header {
+    height: 200px;
+    width: 100%;
+    margin: 0px;
+    background-color: gray;
+  }
+  
+  div > #logo {
+    float: left;
+  }
+  
+  div > #navmenu {
+    float:right;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  div > #navmenu > a {
+    font-size: 28px;
+    color: darkblue;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-decoration: none;
+  }
+  
+  div#content {
+    margin-left: 25px;
+  }
+  
+  #appointment-list {
+    height: 600px;
+    width: 500px;
+    padding: 25px;
+    margin-top: 25px;
+    border: 1px;
+    border-color: black;
+    border-style: dashed;
+  }
+  
+  footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 100%;
+    margin: 0px;
+    background-color: gray;
+    margin-top: auto;
+  }
+  
+  
