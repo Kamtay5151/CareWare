@@ -14,8 +14,8 @@
                (NULL, 'Michael', 'Jackson');
 
     insert into appointments (appt_id, patient_id, room_id, doc_id, time)
-        values (NULL, 1, 1, 1, 1669088800),
-               (NULL, 2, 2, 3, 1669276000);
+        values (NULL, 1, 1, 1, 1669088700),
+               (NULL, 2, 2, 3, 1669275900);
     
     insert into patientRecords (patient_id, note)
         values (1, "patient has had difficulty swallowing recently."),
