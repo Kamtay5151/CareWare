@@ -71,16 +71,19 @@ app.post("/modifyappt", async (req, res) => {
   const date = new Date(+year, month - 1, +day, +hours, +minutes, +0);
   const unixTime = Math.floor(date.getTime() / 1000);
 
-  console.log("doc: " + doctor)
-  console.log("patient: " + patient)
-  console.log("room: " + room)
-  console.log("time: " + time)
-  console.log("unixtime: " + unixTime)
-  console.log("apptid: " + apptId)
-
   await db.run('UPDATE appointments SET doc_id = ?, patient_id = ?, room_id = ?, time = ? WHERE appt_id = ?', doctor, patient, room, unixTime, apptId);
 
   alert("Appointment Updated!");
+  res.redirect("/");
+});
+
+app.post("/deleteappt", async (req, res) => {
+  const db = await dbPromise;
+  const { apptId } = req.body;
+
+  await db.run('DELETE FROM appointments WHERE appt_id = ?', apptId);
+
+  alert("Appointment Deleted!");
   res.redirect("/");
 });
 

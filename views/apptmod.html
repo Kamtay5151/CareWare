@@ -36,7 +36,11 @@
     <label for="datetimeField">Date/Time: </label>
     <input type="datetime-local" id="datetimeField" name="time" value="<% const date = new Date(0); date.setUTCSeconds(appointment[0].time);%><%=date.toISOString().split('.')[0]%>">
     <br>
-    <button type="submit">Submit</button>
+    <button type="submit">Modify Appointment</button>
+</form>
+<form action="/deleteappt" method="post" onsubmit="return confirm('Are you sure you want to delete this appointment?')">
+    <input type="hidden" id="apptId" name="apptId" value="<%= appointment[0].appt_id %>">
+    <button type="submit">Delete Appointment</button>
 </form>
 </body>
 <%- include('partials/footer.html'); %>
