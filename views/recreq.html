@@ -1,6 +1,16 @@
 <% if (typeof error == 'string' && error) { %>
     <p><%= error %></p>
 <% } %>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  </div>
+  <%- include('partials/header.html'); %>
 <form action="/recreq" method="post">
     <label for="patientField">Select a patient: </label>
     <select name="patient" id="patientField">
@@ -10,3 +20,6 @@
     </select>
     <button type="submit">Submit</button>
 </form>
+
+<%- include('partials/footer.html'); %>
+</html>

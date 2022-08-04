@@ -1,6 +1,15 @@
 <% if (typeof error == 'string' && error) { %>
     <p><%= error %></p>
 <% } %>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+<%- include('partials/header.html'); %>
 <form action="/login" method="post">
     <label for="usernameField">username: </label>
     <input type="text" id="usernameField" name="username">
@@ -8,3 +17,7 @@
     <input type="text" id="passwordField" name="password">
     <button type="submit">login</button>
 </form>
+</body>
+<%- include('partials/footer.html'); %>
+
+</html>

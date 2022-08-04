@@ -1,6 +1,15 @@
 <% if (typeof error == 'string' && error) { %>
     <p><%= error %></p>
 <% } %>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+<%- include('partials/header.html'); %>
 <form action="/newappt" method="post">
     <label for="patientField">Patient Name: </label>
     <select name="patient" id="patientField">
@@ -28,3 +37,7 @@
     <br>
     <button type="submit">Submit</button>
 </form>
+</body>
+<%- include('partials/footer.html'); %>
+
+</html>
