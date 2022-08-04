@@ -60,6 +60,12 @@ app.get("/apptcal", async (req, res) => {
   res.render("apptcal", {appointments});
 });
 
+app.get("/recreq", async (req, res) => {
+  const db = await dbPromise;
+  const patients = await db.all('SELECT * FROM patients');
+  res.render("recreq", {patients});
+});
+
 app.post("/register", async (req, res) => {
   const db = await dbPromise;
   const { username, password, passwordRepeat } = req.body;
@@ -115,6 +121,29 @@ app.post("/newappt", async (req, res) => {
   await db.run('INSERT INTO appointments (patient_id, room_id, doc_id, time) VALUES (?, ?, ?, ?)', patient, room, doctor, unixTime);
   alert("Appointment Created!");
   res.redirect("/");
+  
+});
+
+app.post("/recreq", async (req, res) => {
+  const db = await dbPromise;
+  const { patient } = req.body;
+
+  const records = await db.all(`
+  select p.patient_givenname, p.patient_surname, pr.note
+  from patientRecords pr
+  INNER JOIN patients p on p.patient_id = pr.patient_id
+  WHERE p.patient_id = ?
+  `, patient);
+
+  console.log(records)
+  
+  if (records.length !== 0) {
+    res.render("patient_records", {records});
+  } else {
+    alert("No records available for selected patient");
+    res.redirect("/recreq");
+  }
+  
   
 });
 

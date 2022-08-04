@@ -26,7 +26,6 @@ create table appointments (
 
 create table patientRecords (
     record_id INTEGER PRIMARY KEY,
-    appt_id INTEGER,
     patient_id INTEGER NOT NULL,
     note TEXT NOT NULL
 );

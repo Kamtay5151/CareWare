@@ -16,3 +16,8 @@
     insert into appointments (appt_id, patient_id, room_id, doc_id, time)
         values (NULL, 1, 1, 1, 1669088800),
                (NULL, 2, 2, 3, 1669276000);
+    
+    insert into patientRecords (patient_id, note)
+        values (1, "patient has had difficulty swallowing recently."),
+               (1, "patient dislocated their arm while brushing their teeth."),
+               (2, "patient cracked a tooth from eating too many jaw breakers. Remind them to not eat so much candy.");
