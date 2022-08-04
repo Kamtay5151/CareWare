@@ -17,8 +17,6 @@ const dbPromise = open({
   driver: sqlite3.Database,
 });
 
-var indexRouter = require('./routes/index');
-
 var app = express();
 
 // view engine setup
@@ -33,7 +31,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/', require('./routes/index'));
 
 app.get("/register", async (req, res) => {
   res.render("register");
@@ -47,6 +45,19 @@ app.get("/newappt", async (req, res) => {
   const rooms = await db.all('SELECT * FROM rooms');
   const patients = await db.all('SELECT * FROM patients');
   res.render("newappt", {doctors, rooms, patients});
+});
+
+app.get("/apptcal", async (req, res) => {
+  const db = await dbPromise;
+  const appointments = await db.all(`
+  select p.patient_givenname, p.patient_surname, d.doc_givenname, d.doc_surname, r.room_number, a.time 
+  from appointments a
+  INNER JOIN patients p on p.patient_id = a.patient_id
+  INNER JOIN doctors d on d.doc_id = a.doc_id
+  INNER JOIN rooms r on r.room_id = a.room_id
+  ORDER BY a.time
+  `);
+  res.render("apptcal", {appointments});
 });
 
 app.post("/register", async (req, res) => {
