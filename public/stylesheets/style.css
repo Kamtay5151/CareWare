@@ -54,6 +54,13 @@ div#content {
   border-style: dashed;
 }
 
+.appointment {
+  background-color: azure;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
 footer {
   display: flex;
   justify-content: center;

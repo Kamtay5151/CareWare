@@ -46,11 +46,48 @@ app.get("/newappt", async (req, res) => {
   const patients = await db.all('SELECT * FROM patients');
   res.render("newappt", {doctors, rooms, patients});
 });
+app.post("/apptmod", async (req, res) => {
+  const db = await dbPromise;
+  const { apptId } = req.body;
+  const appointment = await db.all(`
+  select * 
+  from appointments a
+  WHERE a.appt_id = ?
+  `, apptId);
+  const doctors = await db.all('SELECT * FROM doctors');
+  const rooms = await db.all('SELECT * FROM rooms');
+  const patients = await db.all('SELECT * FROM patients');
+  res.render("apptmod", {doctors, rooms, patients, appointment});
+});
+
+app.post("/modifyappt", async (req, res) => {
+  const db = await dbPromise;
+  const { doctor, patient, room, time, apptId } = req.body;
+
+  //convert time selection to unix/epoch time for DB
+  const [datePart, timePart] = time.split('T');
+  const [year, month, day] = datePart.split('-');
+  const [hours, minutes] = timePart.split(':');
+  const date = new Date(+year, month - 1, +day, +hours, +minutes, +0);
+  const unixTime = Math.floor(date.getTime() / 1000);
+
+  console.log("doc: " + doctor)
+  console.log("patient: " + patient)
+  console.log("room: " + room)
+  console.log("time: " + time)
+  console.log("unixtime: " + unixTime)
+  console.log("apptid: " + apptId)
+
+  await db.run('UPDATE appointments SET doc_id = ?, patient_id = ?, room_id = ?, time = ? WHERE appt_id = ?', doctor, patient, room, unixTime, apptId);
+
+  alert("Appointment Updated!");
+  res.redirect("/");
+});
 
 app.get("/apptcal", async (req, res) => {
   const db = await dbPromise;
   const appointments = await db.all(`
-  select p.patient_givenname, p.patient_surname, d.doc_givenname, d.doc_surname, r.room_number, a.time 
+  select p.patient_givenname, p.patient_surname, d.doc_givenname, d.doc_surname, r.room_number, a.time, a.appt_id 
   from appointments a
   INNER JOIN patients p on p.patient_id = a.patient_id
   INNER JOIN doctors d on d.doc_id = a.doc_id

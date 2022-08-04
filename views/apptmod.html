@@ -1,0 +1,44 @@
+<% if (typeof error == 'string' && error) { %>
+    <p><%= error %></p>
+<% } %>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+<%- include('partials/header.html'); %>
+<form action="/modifyappt" method="post">
+    <input type="hidden" id="apptId" name="apptId" value="<%= appointment[0].appt_id %>">
+    <label for="patientField">Patient Name: </label>
+    <select name="patient" id="patientField">
+        <% patients.forEach(function(patient) { %>
+            <option value="<%= patient.patient_id %>" <% if(patient.patient_id == appointment[0].patient_id) {%> selected <%} %>><%= patient.patient_surname %>, <%= patient.patient_givenname %></option>
+        <% }); %> 
+    </select>
+    <br>
+    <label for="doctorField">Doctor: </label>
+    <select name="doctor" id="doctorField">
+        <% doctors.forEach(function(doctor) { %>
+            <option value="<%= doctor.doc_id %>" <% if(doctor.doc_id == appointment[0].doc_id) {%> selected <%} %>><%= doctor.doc_surname %>, <%= doctor.doc_givenname %></option>
+        <% }); %> 
+    </select>
+    <br>
+    <label for="roomField">Room: </label>
+    <select name="room" id="roomField">
+        <% rooms.forEach(function(room) { %>
+            <option value="<%= room.room_id %>" <% if(room.room_id == appointment[0].room_id) {%> selected <%} %>><%= room.room_number %></option>
+        <% }); %> 
+    </select>
+    <br>
+    <label for="datetimeField">Date/Time: </label>
+    <input type="datetime-local" id="datetimeField" name="time" value="<% const date = new Date(0); date.setUTCSeconds(appointment[0].time);%><%=date.toISOString().split('.')[0]%>">
+    <br>
+    <button type="submit">Submit</button>
+</form>
+</body>
+<%- include('partials/footer.html'); %>
+
+</html>

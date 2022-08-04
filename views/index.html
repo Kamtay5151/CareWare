@@ -13,13 +13,15 @@
         <% appointments.forEach(function(appointment) { 
           const datetime = new Date(appointment.time * 1000);
           %>
-          <div class="appointment"> 
-            <br>
-            Patient: <%= appointment.patient_surname%>, <%= appointment.patient_givenname %> <br>
-            Doctor: <%= appointment.doc_surname%>, <%= appointment.doc_givenname %> <br>
-            Room: <%= appointment.room_number%> <br>
-            Time: <%= datetime.toLocaleString() %> <br>
-          </div>
+          <form action="/apptmod" method="post" id="<%= appointment.appt_id %>-form">
+            <input type="hidden" id="apptId" name="apptId" value="<%= appointment.appt_id %>">
+            <div class="appointment" onclick="document.getElementById('<%= appointment.appt_id %>-form').submit();"> 
+              Patient: <%= appointment.patient_surname%>, <%= appointment.patient_givenname %> <br>
+              Doctor: <%= appointment.doc_surname%>, <%= appointment.doc_givenname %> <br>
+              Room: <%= appointment.room_number%> <br>
+              Time: <%= datetime.toLocaleString() %> <br>
+            </div>
+          </form>
         <% }); %> 
       </div>
     </div>

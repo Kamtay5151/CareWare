@@ -13,7 +13,7 @@ const dbPromise = open({
 router.get('/', async function(req, res, next) {
   const db = await dbPromise;
   const appointments = await db.all(`
-  select p.patient_givenname, p.patient_surname, d.doc_givenname, d.doc_surname, r.room_number, a.time 
+  select p.patient_givenname, p.patient_surname, d.doc_givenname, d.doc_surname, r.room_number, a.time, a.appt_id 
   from appointments a
   INNER JOIN patients p on p.patient_id = a.patient_id
   INNER JOIN doctors d on d.doc_id = a.doc_id
