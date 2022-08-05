@@ -16,7 +16,7 @@ router.get("/newrecord", async (req, res) => {
 
 router.post("/newrecord", async (req, res) => {
   const db = await dbPromise;
-  const { recordType, initialLoad, doc_givenname, doc_surname, patient_givenname, patient_surname, room_number, patient, doctor, room, time, note } = req.body;
+  const { recordType, initialLoad, doc_givenname, doc_surname, patient_givenname, patient_surname, patient_sex, patient_dob, patient_height_feet, patient_height_in, patient_weight, room_number, patient, doctor, room, time, note } = req.body;
 
   if (recordType && initialLoad) {
     if (recordType == "appt") {
@@ -36,7 +36,9 @@ router.post("/newrecord", async (req, res) => {
     alert("Doctor Added!");
     res.redirect("/");
   } else if (recordType == "patient") {
-    await db.run('INSERT INTO patients (patient_givenname, patient_surname) VALUES (?, ?)', patient_givenname, patient_surname)
+    const newPatient = await db.run('INSERT INTO patients (patient_givenname, patient_surname) VALUES (?, ?) RETURNING *', patient_givenname, patient_surname)
+    console.log(newPatient.lastID)
+    await db.run('INSERT INTO patientInfo (patient_id, sex, dob, height_feet, height_in, weight) VALUES (?, ?, ?, ?, ?, ?)', newPatient.lastID, patient_sex, patient_dob, patient_height_feet, patient_height_in, patient_weight)
     alert("Patient Added!");
     res.redirect("/");
   } else if (recordType == "room") {

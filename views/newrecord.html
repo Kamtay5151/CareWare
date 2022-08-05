@@ -41,6 +41,30 @@
         <br>
         <label for="patient_givenname">Patient Last Name: </label>
         <input type="text" name="patient_surname">
+        <br>
+        <label for="patient_sex">Patient Sex: </label>
+        <select name="patient_sex">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+        <br>
+        <label for="patient_dob">Patient Date of Birth: </label>
+        <input type="date" name="patient_dob">
+        <br>
+        <label for="patient_height">Patient Height: </label>
+        <select name="patient_height_feet">
+            <% for (i=0; i <= 8; i++) { %>
+                <option value="<%= i %>"><%= i %></option>
+            <% } %>
+        </select>feet 
+        <select name="patient_height_in">
+            <% for (i=0; i <= 11; i++) { %>
+                <option value="<%= i %>"><%= i %></option>
+            <% } %>
+        </select>inches
+        <br>
+        <label for="patient_weight">Patient Weight: </label>
+        <input type="number" name="patient_weight">
 
     <% }%> 
     <% if (recordType == "room") { %>
