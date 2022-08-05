@@ -21,6 +21,7 @@
             <option value="patient">Patient</option>
             <option value="room">Room</option>
             <option value="appt">Appointment</option>
+            <option value="note">Note</option>
         </select>
 
     <% }%>
@@ -75,8 +76,20 @@
         <input type="datetime-local" id="datetimeField" name="time">
 
     <% }%> 
+    <% if (recordType == "note") { %>
+        <label for="patientField">Patient Name: </label>
+        <select name="patient" id="patientField">
+            <% patients.forEach(function(patient) { %>
+                <option value="<%= patient.patient_id %>"><%= patient.patient_surname %>, <%= patient.patient_givenname %></option>
+            <% }); %> 
+        </select>
+        <br>
+        <label for="note">Note: </label>
+        <input type="text" name="note">
+
+    <% }%> 
     <% if (recordType != null) { %>
-        
+
         <input type="hidden" id="recordType" name="recordType" value="<%= recordType %>">
         <br>
         <button type="submit">Submit</button>

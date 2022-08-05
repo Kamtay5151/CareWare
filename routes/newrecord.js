@@ -16,7 +16,7 @@ router.get("/newrecord", async (req, res) => {
 
 router.post("/newrecord", async (req, res) => {
   const db = await dbPromise;
-  const { recordType, initialLoad, doc_givenname, doc_surname, patient_givenname, patient_surname, room_number, patient, doctor, room, time } = req.body;
+  const { recordType, initialLoad, doc_givenname, doc_surname, patient_givenname, patient_surname, room_number, patient, doctor, room, time, note } = req.body;
 
   if (recordType && initialLoad) {
     if (recordType == "appt") {
@@ -24,6 +24,10 @@ router.post("/newrecord", async (req, res) => {
       const rooms = await db.all('SELECT * FROM rooms');
       const patients = await db.all('SELECT * FROM patients');
       res.render("newrecord", {recordType, doctors, rooms, patients});
+    }
+    if (recordType == "note") {
+      const patients = await db.all('SELECT * FROM patients');
+      res.render("newrecord", {recordType, patients});
     }
     res.render("newrecord", {recordType});
   } else {
@@ -50,6 +54,10 @@ router.post("/newrecord", async (req, res) => {
     await db.run('INSERT INTO appointments (patient_id, room_id, doc_id, time) VALUES (?, ?, ?, ?)', patient, room, doctor, unixTime);
     alert("Appointment Created!");
     res.redirect("/");
+    } else if (recordType == "note") {
+      await db.run('INSERT INTO patientRecords (note, patient_id) VALUES (?, ?)', note, patient)
+      alert("Note Added!");
+      res.redirect("/");
     }
   }
 });
