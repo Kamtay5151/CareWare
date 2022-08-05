@@ -28,7 +28,7 @@ appointments.sort(dynamicSort(sort))
    <div id="content">
       <div id="all-appointment-list">
         <h3>All Appointments:</h3>
-        <form action="/apptcal" method="post" id="sort-form">
+        <form action="/apptlist" method="post" id="sort-form">
           <label for="sort">Sort Method: </label>
           <select name="sort" id="sortSelect" onchange="document.getElementById('sort-form').submit();">
             <option value="doc_id" <% if (sort == "doctor") {%> selected <% } %> >Doctor</option>
