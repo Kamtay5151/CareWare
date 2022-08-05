@@ -37,7 +37,7 @@ app.use(require('./routes/apptlist'));
 app.use(require('./routes/apptmod'));
 app.use(require('./routes/login'));
 app.use(require('./routes/modifyappt'));
-app.use(require('./routes/newappt'));
+app.use(require('./routes/newrecord'));
 app.use(require('./routes/recreq'));
 app.use(require('./routes/register'));
 
