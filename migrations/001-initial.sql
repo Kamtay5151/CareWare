@@ -30,6 +30,16 @@ create table patientRecords (
     note TEXT NOT NULL
 );
 
+create table patientInfo (
+    record_id INTEGER PRIMARY KEY,
+    patient_id INTEGER NOT NULL,
+    sex TEXT,
+    dob DATE,
+    height_feet INTEGER,
+    height_in INTEGER,
+    weight INTEGER
+);
+
 create table users (
     user_id INTEGER PRIMARY KEY,
     username STRING NOT NULL,
@@ -42,4 +52,5 @@ drop table rooms;
 drop table doctors;
 drop table appointments;
 drop table patientRecords;
+drop table patientInfo;
 drop table users;

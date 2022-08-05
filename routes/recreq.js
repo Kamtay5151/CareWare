@@ -21,16 +21,28 @@ router.post("/recreq", async (req, res) => {
   const { patient } = req.body;
 
   const records = await db.all(`
-  select p.patient_givenname, p.patient_surname, pr.note
+  select pr.note
   from patientRecords pr
-  INNER JOIN patients p on p.patient_id = pr.patient_id
+  WHERE pr.patient_id = ?
+  `, patient);
+
+  const info = await db.all(`
+  select pi.sex, pi.dob, pi.height_feet, pi.height_in, pi.weight
+  from patientInfo pi
+  WHERE pi.patient_id = ?
+  `, patient);
+
+  const patientName = await db.all(`
+  select p.patient_givenname, p.patient_surname
+  from patients p 
   WHERE p.patient_id = ?
   `, patient);
 
   console.log(records)
+  console.log(info)
   
-  if (records.length !== 0) {
-    res.render("patient_records", {records});
+  if (records.length !== 0 || info.length !== 0) {
+    res.render("patient_records", {records, info, patientName});
   } else {
     alert("No records available for selected patient");
     res.redirect("/recreq");

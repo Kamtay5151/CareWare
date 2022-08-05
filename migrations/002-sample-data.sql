@@ -21,3 +21,7 @@
         values (1, "patient has had difficulty swallowing recently."),
                (1, "patient dislocated their arm while brushing their teeth."),
                (2, "patient cracked a tooth from eating too many jaw breakers. Remind them to not eat so much candy.");
+    
+    insert into patientInfo (patient_id, sex, dob, height_feet, height_in, weight)
+        values (1, "Male", "1996-01-01", 6, 3, 130),
+               (3, "Female", "1997-12-25", 5, 9, 115)
