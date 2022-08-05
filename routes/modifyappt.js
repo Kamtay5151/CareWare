@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+import alert from 'alert';
+
 import sqlite3 from 'sqlite3';
 import { open } from "sqlite";
 const dbPromise = open({
