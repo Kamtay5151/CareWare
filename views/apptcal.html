@@ -1,3 +1,20 @@
+<%
+function dynamicSort(property) {
+  var sortOrder = 1;
+  if(property[0] === "-") {
+      sortOrder = -1;
+      property = property.substr(1);
+  }
+  return function (a,b) {
+      var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+      return result * sortOrder;
+  }
+}
+
+appointments.sort(dynamicSort(sort))
+
+%>
+
 <!DOCTYPE html>
 <html>
 
@@ -11,6 +28,15 @@
    <div id="content">
       <div id="all-appointment-list">
         <h3>All Appointments:</h3>
+        <form action="/apptcal" method="post" id="sort-form">
+          <label for="sort">Sort Method: </label>
+          <select name="sort" id="sortSelect" onchange="document.getElementById('sort-form').submit();">
+            <option value="doc_id" <% if (sort == "doctor") {%> selected <% } %> >Doctor</option>
+            <option value="patient_id" <% if (sort == "patient") {%> selected <% } %> >Patient</option>
+            <option value="room_id" <% if (sort == "room") {%> selected <% } %> >Room</option>
+            <option value="time" <% if (sort == "time") {%> selected <% } %> >Time</option>
+          </select>
+        </form>
         <% appointments.forEach(function(appointment) { 
           const datetime = new Date(appointment.time * 1000);
           %>
