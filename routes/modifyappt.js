@@ -12,7 +12,7 @@ const dbPromise = open({
 
 router.post("/modifyappt", async (req, res) => {
   const db = await dbPromise;
-  const { doctor, patient, room, time, apptId } = req.body;
+  const { doctor, patient, room, time, appt_id } = req.body;
 
   //convert time selection to unix/epoch time for DB
   const [datePart, timePart] = time.split('T');
@@ -21,19 +21,9 @@ router.post("/modifyappt", async (req, res) => {
   const date = new Date(+year, month - 1, +day, +hours, +minutes, +0);
   const unixTime = Math.floor(date.getTime() / 1000);
 
-  await db.run('UPDATE appointments SET doc_id = ?, patient_id = ?, room_id = ?, time = ? WHERE appt_id = ?', doctor, patient, room, unixTime, apptId);
+  await db.run('UPDATE appointments SET doc_id = ?, patient_id = ?, room_id = ?, time = ? WHERE appt_id = ?', doctor, patient, room, unixTime, appt_id);
 
   alert("Appointment Updated!");
-  res.redirect("/");
-});
-
-router.post("/deleteappt", async (req, res) => {
-  const db = await dbPromise;
-  const { apptId } = req.body;
-
-  await db.run('DELETE FROM appointments WHERE appt_id = ?', apptId);
-
-  alert("Appointment Deleted!");
   res.redirect("/");
 });
 

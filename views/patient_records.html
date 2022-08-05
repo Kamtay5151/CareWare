@@ -8,23 +8,28 @@
 <body>
   </div>
   <%- include('partials/header.html'); %>
-   <div id="content">
+    <div id="content">
       <div id="records-list">
-        <h3>All records for patient: <%= patientName[0].patient_surname %>, <%= patientName[0].patient_givenname %></h3>
-        <% if (info.length != 0) { %>
-          <div class="patientInfo"> 
+        <h3>All records for patient: <%= patientName[0].patient_surname %>, <%= patientName[0].patient_givenname %>
+        </h3>
+        <% if (info.length !=0) { %>
+          <div class="patientInfo">
             Sex: <%= info[0].sex%> <br>
             Date of Birth: <%= info[0].dob %> <br>
             Height: <%= info[0].height_feet %>'<%= info[0].height_in %>" <br>
             Weight: <%= info[0].weight %> <br>
           </div>
-        <% } %>
-        <% if (records.length != 0) { records.forEach(function(record) { %>
-          <div class="record"> 
-            <br>
-            Note: <%= record.note %> <br>
-          </div>
-        <% });} %> 
+          <% } %>
+          <% if (records.length !=0) { records.forEach(function(record) { %>
+            <form action="/deleterecord" method="post">
+              <input type="hidden" name="record_id" value="<%= record.record_id %>">
+              <input type="hidden" id="recordType" name="recordType" value="note">
+              <div class="record">
+                <button type="submit">Delete</button>
+                Note: <%= record.note %> <br>
+              </div>
+            </form>
+            <% });} %>
       </div>
     </div>
 </body>

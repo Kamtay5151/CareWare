@@ -10,6 +10,38 @@ const dbPromise = open({
   driver: sqlite3.Database,
 });
 
+/*router.get("/modifyrecord", async (req, res) => {
+  res.render("modifyrecord", { recordType: null, doctors: null, patients: null, rooms: null });
+});*/
+
+router.post("/deleterecord", async (req, res) => {
+  const db = await dbPromise;
+  const { recordType, doc_id, patient_id, room_id, record_id, appt_id } = req.body;
+
+  if (recordType == "note") {
+    await db.run('DELETE FROM patientRecords WHERE record_id = ?', record_id);
+    alert("Note Deleted!");
+  } else if (recordType == "doctor") {
+    await db.run('DELETE FROM doctors WHERE doc_id = ?', doc_id);
+    alert("Doctor Deleted!");
+  } else if (recordType == "patient") {
+    await db.run('DELETE FROM patients WHERE patient_id = ?', patient_id);
+    await db.run('DELETE FROM patientInfo WHERE patient_id = ?', patient_id);
+    await db.run('DELETE FROM patientRecords WHERE patient_id = ?', patient_id);
+    await db.run('DELETE FROM appointments WHERE patient_id = ?', patient_id);
+    alert("Patient Deleted!");
+  } else if (recordType == "room") {
+    await db.run('DELETE FROM rooms WHERE room_id = ?', room_id);
+    alert("Room Deleted!");
+  } else if (recordType == "appointment") {
+    await db.run('DELETE FROM appointments WHERE appt_id = ?', appt_id);  
+    alert("Appointment Deleted!");
+  }
+
+  res.redirect("/");
+});
+
+/*
 router.get("/newrecord", async (req, res) => {
   res.render("newrecord", { recordType: null, doctors: null, patients: null, rooms: null });
 });
@@ -63,5 +95,6 @@ router.post("/newrecord", async (req, res) => {
     }
   }
 });
+*/
 
 module.exports = router;

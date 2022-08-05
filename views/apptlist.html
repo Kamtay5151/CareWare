@@ -41,7 +41,7 @@ appointments.sort(dynamicSort(sort))
           const datetime = new Date(appointment.time * 1000);
           %>
           <form action="/apptmod" method="post" id="<%= appointment.appt_id %>-form">
-          <input type="hidden" id="apptId" name="apptId" value="<%= appointment.appt_id %>">
+          <input type="hidden" id="appt_id" name="appt_id" value="<%= appointment.appt_id %>">
           <div class="appointment" onclick="document.getElementById('<%= appointment.appt_id %>-form').submit();"> 
             <br>
             Patient: <%= appointment.patient_surname%>, <%= appointment.patient_givenname %> <br>

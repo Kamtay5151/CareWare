@@ -21,13 +21,13 @@ router.post("/recreq", async (req, res) => {
   const { patient } = req.body;
 
   const records = await db.all(`
-  select pr.note
+  select pr.note, pr.record_id
   from patientRecords pr
   WHERE pr.patient_id = ?
   `, patient);
 
   const info = await db.all(`
-  select pi.sex, pi.dob, pi.height_feet, pi.height_in, pi.weight
+  select pi.sex, pi.dob, pi.height_feet, pi.height_in, pi.weight, pi.patient_id
   from patientInfo pi
   WHERE pi.patient_id = ?
   `, patient);
