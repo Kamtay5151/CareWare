@@ -31,9 +31,9 @@ appointments.sort(dynamicSort(sort))
         <form action="/apptlist" method="post" id="sort-form">
           <label for="sort">Sort Method: </label>
           <select name="sort" id="sortSelect" onchange="document.getElementById('sort-form').submit();">
-            <option value="doc_id" <% if (sort == "doctor") {%> selected <% } %> >Doctor</option>
-            <option value="patient_id" <% if (sort == "patient") {%> selected <% } %> >Patient</option>
-            <option value="room_id" <% if (sort == "room") {%> selected <% } %> >Room</option>
+            <option value="doc_id" <% if (sort == "doctor_id") {%> selected <% } %> >Doctor</option>
+            <option value="patient_id" <% if (sort == "patient_id") {%> selected <% } %> >Patient</option>
+            <option value="room_id" <% if (sort == "room_id") {%> selected <% } %> >Room</option>
             <option value="time" <% if (sort == "time") {%> selected <% } %> >Time</option>
           </select>
         </form>
