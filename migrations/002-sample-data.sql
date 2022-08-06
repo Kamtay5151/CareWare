@@ -24,4 +24,7 @@ insert into patientRecords (patient_id, note)
 
 insert into patientInfo (patient_id, sex, dob, height_feet, height_in, weight)
     values (1, "Male", "1996-01-01", 6, 3, 130),
-           (3, "Female", "1997-12-25", 5, 9, 115)
+           (3, "Female", "1997-12-25", 5, 9, 115);
+
+insert into users (username, password)
+    values ("admin", "$2b$10$8BqknQ0N/7yKo.Md7LMGQ.qb1Y1mo4J5m3Vmcum7lVPK4LZnJrhSm");

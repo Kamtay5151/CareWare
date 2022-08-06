@@ -9,12 +9,12 @@
 </head>
 
 <body>
-<%- include('partials/header.html'); %>
+<%- include('partials/loginheader.html'); %>
 <form action="/login" method="post">
     <label for="usernameField">username: </label>
     <input type="text" id="usernameField" name="username">
     <label for="passwordField">password: </label>
-    <input type="text" id="passwordField" name="password">
+    <input type="password" id="passwordField" name="password">
     <button type="submit">login</button>
 </form>
 </body>

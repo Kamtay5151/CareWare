@@ -2,14 +2,13 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+const sessions = require('express-session');
 var logger = require('morgan');
 import bcrypt from 'bcrypt';
 import alert from 'alert';
 
 import sqlite3 from 'sqlite3';
 import { open } from "sqlite";
-
-const SALT_ROUNDS = 10;
 
 //Initialize DB
 const dbPromise = open({
@@ -27,7 +26,7 @@ app.set('view engine', 'html');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -41,6 +40,14 @@ app.use(require('./routes/newrecord'));
 app.use(require('./routes/modifyrecord'));
 app.use(require('./routes/recreq'));
 app.use(require('./routes/register'));
+
+const oneDay = 1000 * 60 * 60 * 24;
+app.use(sessions({
+    secret: "CareWareSuperS3cr3tK3y!Chang3M3!",
+    saveUninitialized:true,
+    cookie: { maxAge: oneDay },
+    resave: false 
+}));
 
 const setup = async () => {
   const db = await dbPromise;
