@@ -1,6 +1,3 @@
-<% if (typeof error == 'string' && error) { %>
-    <p><%= error %></p>
-<% } %>
 <!DOCTYPE html>
 <html>
 
@@ -9,14 +6,18 @@
 </head>
 
 <body>
-<%- include('partials/loginheader.html'); %>
-<form action="/login" method="post">
-    <label for="usernameField">username: </label>
-    <input type="text" id="usernameField" name="username">
-    <label for="passwordField">password: </label>
-    <input type="password" id="passwordField" name="password">
-    <button type="submit">login</button>
-</form>
+  <%- include('partials/loginheader.html'); %>
+    <div id="content">
+      <form action="/login" method="post">
+        <label for="usernameField">username: </label>
+        <input type="text" id="usernameField" name="username">
+        <br>
+        <label for="passwordField">password: </label>
+        <input type="password" id="passwordField" name="password">
+        <br>
+        <button type="submit">login</button>
+      </form>
+    </div>
 </body>
 <%- include('partials/footer.html'); %>
 

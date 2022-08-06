@@ -1,6 +1,6 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: darkgray;
+  background-color: white;
   margin: 0px;
   display: flex;
   min-height: 100vh;
@@ -17,7 +17,7 @@ header {
   height: 200px;
   width: 100%;
   margin: 0px;
-  background-color: gray;
+  background-color: teal;
 }
 
 div > #logo {
@@ -34,28 +34,23 @@ div > #navmenu {
 
 div > #navmenu > a {
   font-size: 28px;
-  color: darkblue;
+  color: white;
   padding-left: 20px;
   padding-right: 20px;
   text-decoration: none;
 }
 
-div#content {
-  margin-left: 25px;
-}
-
-#appointment-list {
+#content {
   height: 600px;
   width: 500px;
+  font-size: 20px;
   padding: 25px;
   margin-top: 25px;
-  border: 1px;
-  border-color: black;
-  border-style: dashed;
+  margin: 0 auto;
 }
 
 .appointment {
-  background-color: azure;
+  background-color: lightgray;
   margin-top: 20px;
   margin-bottom: 20px;
   cursor: pointer;
@@ -65,9 +60,9 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 200px;
+  height: 50px;
   width: 100%;
   margin: 0px;
-  background-color: gray;
+  background-color: teal;
   margin-top: auto;
 }

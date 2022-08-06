@@ -9,7 +9,7 @@
   <%- include('partials/header.html'); %>
    <div id="content">
       <div id="appointment-list">
-        <h3>Upcoming Appointments:</h3>
+        <center><h3>Upcoming Appointments:</h3></center>
         <% appointments.forEach(function(appointment) { 
           const datetime = new Date(appointment.time * 1000);
           %>

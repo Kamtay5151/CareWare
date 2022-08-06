@@ -1,6 +1,3 @@
-<% if (typeof error == 'string' && error) { %>
-    <p><%= error %></p>
-<% } %>
 <!DOCTYPE html>
 <html>
 
@@ -9,17 +6,21 @@
 </head>
 
 <body>
-  </div>
   <%- include('partials/header.html'); %>
-<form action="/recreq" method="post">
-    <label for="patientField">Select a patient: </label>
-    <select name="patient" id="patientField">
-        <% patients.forEach(function(patient) { %>
-            <option value="<%= patient.patient_id %>"><%= patient.patient_surname %>, <%= patient.patient_givenname %></option>
-        <% }); %> 
-    </select>
-    <button type="submit">Submit</button>
-</form>
+    <div id="content">
+      <form action="/recreq" method="post">
+        <label for="patientField">Select a patient: </label>
+        <select name="patient" id="patientField">
+          <% patients.forEach(function(patient) { %>
+            <option value="<%= patient.patient_id %>">
+              <%= patient.patient_surname %>, <%= patient.patient_givenname %>
+            </option>
+            <% }); %>
+        </select>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
 
-<%- include('partials/footer.html'); %>
+    <%- include('partials/footer.html'); %>
+
 </html>

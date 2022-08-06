@@ -12,6 +12,7 @@
 
         <body>
             <%- include('partials/header.html'); %>
+            <div id="content">
                 <form action="/modifyappt" method="post">
                     <input type="hidden" id="appt_id" name="appt_id" value="<%= appointment[0].appt_id %>">
                     <label for="patientField">Patient Name: </label>
@@ -54,6 +55,7 @@
                     <input type="hidden" id="recordType" name="recordType" value="appointment">
                     <button type="submit">Delete Appointment</button>
                 </form>
+            </div>
         </body>
         <%- include('partials/footer.html'); %>
 

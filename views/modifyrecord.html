@@ -1,145 +1,141 @@
-<% if (typeof error=='string' && error) { %>
-    <p>
-        <%= error %>
-    </p>
-    <% } %>
-        <!DOCTYPE html>
-        <html>
+<!DOCTYPE html>
+<html>
 
-        <head>
-            <link rel='stylesheet' href='/stylesheets/style.css' />
-        </head>
+<head>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
 
-        <body>
-            <%- include('partials/header.html'); %>
-                <form action="/newrecord" method="post" id="newrecord-form">
-                    <% if (recordType==null) { %>
+<body>
+    <%- include('partials/header.html'); %>
+        <div id="content">
+            <form action="/newrecord" method="post" id="newrecord-form">
+                <% if (recordType==null) { %>
 
-                        <input type="hidden" id="initialLoad" name="initialLoad" value="<%= true %>">
-                        <label for="recordType">Select the type of record you would like to add: </label>
-                        <select name="recordType" id="recordType"
-                            onchange="document.getElementById('newrecord-form').submit();">
-                            <option value="none" selected hidden>Select a record type</option>
-                            <option value="doctor">Doctor</option>
-                            <option value="patient">Patient</option>
-                            <option value="room">Room</option>
-                            <option value="appt">Appointment</option>
-                            <option value="note">Note</option>
-                        </select>
+                    <input type="hidden" id="initialLoad" name="initialLoad" value="<%= true %>">
+                    <label for="recordType">Select the type of record you would like to add: </label>
+                    <select name="recordType" id="recordType"
+                        onchange="document.getElementById('newrecord-form').submit();">
+                        <option value="none" selected hidden>Select a record type</option>
+                        <option value="doctor">Doctor</option>
+                        <option value="patient">Patient</option>
+                        <option value="room">Room</option>
+                        <option value="appt">Appointment</option>
+                        <option value="note">Note</option>
+                    </select>
 
-                        <% }%>
-                            <% if (recordType=="doctor" ) { %>
+                    <% }%>
+                        <% if (recordType=="doctor" ) { %>
 
-                                <label for="doc_givenname">Doctor First Name: </label>
-                                <input type="text" name="doc_givenname">
-                                <br>
-                                <label for="doc_surname">Doctor Last Name: </label>
-                                <input type="text" name="doc_surname">
+                            <label for="doc_givenname">Doctor First Name: </label>
+                            <input type="text" name="doc_givenname">
+                            <br>
+                            <label for="doc_surname">Doctor Last Name: </label>
+                            <input type="text" name="doc_surname">
 
-                                <% }%>
-                                    <% if (recordType=="patient" ) { %>
+                            <% }%>
+                                <% if (recordType=="patient" ) { %>
 
-                                        <label for="patient_givenname">Patient First Name: </label>
-                                        <input type="text" name="patient_givenname">
-                                        <br>
-                                        <label for="patient_givenname">Patient Last Name: </label>
-                                        <input type="text" name="patient_surname">
-                                        <br>
-                                        <label for="patient_sex">Patient Sex: </label>
-                                        <select name="patient_sex">
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                        </select>
-                                        <br>
-                                        <label for="patient_dob">Patient Date of Birth: </label>
-                                        <input type="date" name="patient_dob">
-                                        <br>
-                                        <label for="patient_height">Patient Height: </label>
-                                        <select name="patient_height_feet">
-                                            <% for (i=0; i <=8; i++) { %>
-                                                <option value="<%= i %>">
-                                                    <%= i %>
-                                                </option>
-                                                <% } %>
-                                        </select>feet
-                                        <select name="patient_height_in">
-                                            <% for (i=0; i <=11; i++) { %>
-                                                <option value="<%= i %>">
-                                                    <%= i %>
-                                                </option>
-                                                <% } %>
-                                        </select>inches
-                                        <br>
-                                        <label for="patient_weight">Patient Weight: </label>
-                                        <input type="number" name="patient_weight">
+                                    <label for="patient_givenname">Patient First Name: </label>
+                                    <input type="text" name="patient_givenname">
+                                    <br>
+                                    <label for="patient_givenname">Patient Last Name: </label>
+                                    <input type="text" name="patient_surname">
+                                    <br>
+                                    <label for="patient_sex">Patient Sex: </label>
+                                    <select name="patient_sex">
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                    <br>
+                                    <label for="patient_dob">Patient Date of Birth: </label>
+                                    <input type="date" name="patient_dob">
+                                    <br>
+                                    <label for="patient_height">Patient Height: </label>
+                                    <select name="patient_height_feet">
+                                        <% for (i=0; i <=8; i++) { %>
+                                            <option value="<%= i %>">
+                                                <%= i %>
+                                            </option>
+                                            <% } %>
+                                    </select>feet
+                                    <select name="patient_height_in">
+                                        <% for (i=0; i <=11; i++) { %>
+                                            <option value="<%= i %>">
+                                                <%= i %>
+                                            </option>
+                                            <% } %>
+                                    </select>inches
+                                    <br>
+                                    <label for="patient_weight">Patient Weight: </label>
+                                    <input type="number" name="patient_weight">
 
-                                        <% }%>
-                                            <% if (recordType=="room" ) { %>
+                                    <% }%>
+                                        <% if (recordType=="room" ) { %>
 
-                                                <label for="room_number">Room Number: </label>
-                                                <input type="text" name="room_number">
+                                            <label for="room_number">Room Number: </label>
+                                            <input type="text" name="room_number">
 
-                                                <% }%>
-                                                    <% if (recordType=="appt" ) { %>
+                                            <% }%>
+                                                <% if (recordType=="appt" ) { %>
 
-                                                        <label for="patientField">Patient Name: </label>
-                                                        <select name="patient" id="patientField">
-                                                            <% patients.forEach(function(patient) { %>
-                                                                <option value="<%= patient.patient_id %>">
-                                                                    <%= patient.patient_surname %>, <%=
-                                                                            patient.patient_givenname %>
-                                                                </option>
-                                                                <% }); %>
-                                                        </select>
-                                                        <br>
-                                                        <label for="doctorField">Doctor: </label>
-                                                        <select name="doctor" id="doctorField">
-                                                            <% doctors.forEach(function(doctor) { %>
-                                                                <option value="<%= doctor.doc_id %>">
-                                                                    <%= doctor.doc_surname %>, <%= doctor.doc_givenname
-                                                                            %>
-                                                                </option>
-                                                                <% }); %>
-                                                        </select>
-                                                        <br>
-                                                        <label for="roomField">Room: </label>
-                                                        <select name="room" id="roomField">
-                                                            <% rooms.forEach(function(room) { %>
-                                                                <option value="<%= room.room_id %>">
-                                                                    <%= room.room_number %>
-                                                                </option>
-                                                                <% }); %>
-                                                        </select>
-                                                        <br>
-                                                        <label for="datetimeField">Date/Time: </label>
-                                                        <input type="datetime-local" id="datetimeField" name="time">
+                                                    <label for="patientField">Patient Name: </label>
+                                                    <select name="patient" id="patientField">
+                                                        <% patients.forEach(function(patient) { %>
+                                                            <option value="<%= patient.patient_id %>">
+                                                                <%= patient.patient_surname %>, <%=
+                                                                        patient.patient_givenname %>
+                                                            </option>
+                                                            <% }); %>
+                                                    </select>
+                                                    <br>
+                                                    <label for="doctorField">Doctor: </label>
+                                                    <select name="doctor" id="doctorField">
+                                                        <% doctors.forEach(function(doctor) { %>
+                                                            <option value="<%= doctor.doc_id %>">
+                                                                <%= doctor.doc_surname %>, <%= doctor.doc_givenname %>
+                                                            </option>
+                                                            <% }); %>
+                                                    </select>
+                                                    <br>
+                                                    <label for="roomField">Room: </label>
+                                                    <select name="room" id="roomField">
+                                                        <% rooms.forEach(function(room) { %>
+                                                            <option value="<%= room.room_id %>">
+                                                                <%= room.room_number %>
+                                                            </option>
+                                                            <% }); %>
+                                                    </select>
+                                                    <br>
+                                                    <label for="datetimeField">Date/Time: </label>
+                                                    <input type="datetime-local" id="datetimeField" name="time">
 
-                                                        <% }%>
-                                                            <% if (recordType=="note" ) { %>
-                                                                <label for="patientField">Patient Name: </label>
-                                                                <select name="patient" id="patientField">
-                                                                    <% patients.forEach(function(patient) { %>
-                                                                        <option value="<%= patient.patient_id %>">
-                                                                            <%= patient.patient_surname %>, <%=
-                                                                                    patient.patient_givenname %>
-                                                                        </option>
-                                                                        <% }); %>
-                                                                </select>
-                                                                <br>
-                                                                <label for="note">Note: </label>
-                                                                <input type="text" name="note">
+                                                    <% }%>
+                                                        <% if (recordType=="note" ) { %>
+                                                            <label for="patientField">Patient Name: </label>
+                                                            <select name="patient" id="patientField">
+                                                                <% patients.forEach(function(patient) { %>
+                                                                    <option value="<%= patient.patient_id %>">
+                                                                        <%= patient.patient_surname %>, <%=
+                                                                                patient.patient_givenname %>
+                                                                    </option>
+                                                                    <% }); %>
+                                                            </select>
+                                                            <br>
+                                                            <label for="note">Note: </label>
+                                                            <input type="text" name="note">
 
-                                                                <% }%>
-                                                                    <% if (recordType !=null) { %>
+                                                            <% }%>
+                                                                <% if (recordType !=null) { %>
 
-                                                                        <input type="hidden" id="recordType"
-                                                                            name="recordType" value="<%= recordType %>">
-                                                                        <br>
-                                                                        <button type="submit">Submit</button>
+                                                                    <input type="hidden" id="recordType"
+                                                                        name="recordType" value="<%= recordType %>">
+                                                                    <br>
+                                                                    <button type="submit">Submit</button>
 
-                                                                        <% }%>
-                </form>
-        </body>
-        <%- include('partials/footer.html'); %>
+                                                                    <% }%>
+            </form>
+        </div>
+</body>
+<%- include('partials/footer.html'); %>
 
-        </html>
+</html>
